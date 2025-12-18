@@ -17,6 +17,9 @@ A modern, stylish frontend application for a gym management system with role-bas
 - **Username**: `testuser1`
 - **Password**: `user123`
 
+- **Username**: `testuser2`
+- **Password**: `it's_me` (⚠️ Will show 400 error due to apostrophe bug)
+
 ### Trainer Role
 - **Username**: `trainer1`
 - **Password**: `trainer123`
