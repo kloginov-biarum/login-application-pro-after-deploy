@@ -12,7 +12,44 @@ This document describes intentional bugs introduced in the Sales Dashboard (`sal
 
 ## List of Intentional Bugs
 
-### Bug #1: Database Connection Timeout in Authentication Function (CRITICAL)
+### Bug #1: 400 Bad Request Error for Apostrophe in Username/Password
+**Location**: Authentication Service (`src/auth.ts` - `authenticate` function)
+
+**Description**: 
+The `authenticate` function throws a 400 Bad Request error when username or password contains an apostrophe character (`'`). This is a validation bug that prevents users with apostrophes in their credentials from logging in.
+
+**Expected Behavior**:
+- Users should be able to log in with any valid characters in username and password
+- Apostrophe should be allowed as a valid character
+
+**Actual Behavior**:
+- When username or password contains an apostrophe (`'`), the function throws:
+  - "400 Bad Request: Username and password cannot contain apostrophe characters. Please remove apostrophes and try again."
+- User `testuser2` with password `it's_me` cannot log in due to this bug
+- The error is displayed immediately after clicking Login
+
+**Test Case**:
+- **Username**: `testuser2`
+- **Password**: `it's_me`
+- **Expected**: Should log in successfully
+- **Actual**: Shows 400 Bad Request error
+
+**How to Find**:
+1. Go to login page
+2. Enter username: `testuser2`
+3. Enter password: `it's_me`
+4. Click Login button
+5. Error message appears: "400 Bad Request: Username and password cannot contain apostrophe characters..."
+
+**Severity**: **HIGH** - Prevents valid users from logging in
+
+**Affected Pages**:
+- Main Login Page (`/`)
+- Alternative Login Page (`/login-application-pro-after-deploy`)
+
+---
+
+### Bug #2: Database Connection Timeout in Authentication Function (CRITICAL)
 **Location**: Authentication Service (`src/auth.ts` - `authenticate` function)
 
 **Description**: 
