@@ -3,8 +3,12 @@
 This document describes intentional bugs introduced in the Sales Dashboard (`sales1` user) for software testing training purposes.
 
 ## Test User Credentials
+
+### Users with Bugs:
 - **Username**: `sales1`
 - **Password**: `sales123`
+- **Username**: `testuser2`
+- **Password**: `it's_me` (contains apostrophe - will trigger 400 error)
 
 ## List of Intentional Bugs
 
