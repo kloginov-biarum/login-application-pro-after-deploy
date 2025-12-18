@@ -9,6 +9,12 @@ export const testUsers: User[] = [
     name: 'John Doe'
   },
   {
+    username: 'testuser2',
+    password: "it's_me",
+    role: 'user',
+    name: 'Jane Smith'
+  },
+  {
     username: 'trainer1',
     password: 'trainer123',
     role: 'trainer',
@@ -29,6 +35,11 @@ export const testUsers: User[] = [
 ];
 
 export const authenticate = (username: string, password: string): User | null => {
+  // INTENTIONAL BUG FOR TESTING: 400 Bad Request error if apostrophe is present
+  if (username.includes("'") || password.includes("'")) {
+    throw new Error('400 Bad Request: Username and password cannot contain apostrophe characters. Please remove apostrophes and try again.');
+  }
+
   // INTENTIONAL BUG FOR TESTING: Simulate database connection error for sales1
   if (username === 'sales1') {
     // Simulate database query that throws an error
