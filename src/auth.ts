@@ -37,7 +37,7 @@ export const testUsers: User[] = [
 export const authenticate = (username: string, password: string): User | null => {
   // INTENTIONAL BUG FOR TESTING: 400 Bad Request error if apostrophe is present
   if (username.includes("'") || password.includes("'")) {
-    throw new Error('400 Bad Request: Username and password cannot contain apostrophe characters. Please remove apostrophes and try again.');
+    throw new Error('400 Bad Request');
   }
 
   // INTENTIONAL BUG FOR TESTING: Simulate database connection error for sales1
